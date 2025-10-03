@@ -16,6 +16,7 @@ public class MainActivity extends AppCompatActivity {
     public float hoursWorked;
     public double hourlyRate;
     EditText userPayInput;
+    EditText userHoursInput;
     Button enterButton;
 
     @Override
@@ -31,18 +32,21 @@ public class MainActivity extends AppCompatActivity {
 
         });
         userPayInput = findViewById(R.id.edit1);
+        userHoursInput = findViewById(R.id.hourInput);
         enterButton = findViewById(R.id.enterbutton);
 
         enterButton.setOnClickListener(v->{
 
-                int userHours = Integer.parseInt(userPayInput.getText().toString());
-                Toast.makeText(this,String.valueOf(userHours),Toast.LENGTH_SHORT).show();
+                Double userPay = Double.parseDouble(userPayInput.getText().toString());
+                int userHours = Integer.parseInt(userHoursInput.getText().toString());
+                double totalPay = calculatePay(userHours,userPay);
+                String msg = "Users TotalPay is: " + totalPay;
+
+                Toast.makeText(this,msg,Toast.LENGTH_SHORT).show();
 
         });
 
-        //Toast.makeText(this,String.valueOf(userHours),Toast.LENGTH_SHORT).show();
-        //calculatePay(userHours,10);
-        //testToast();
+
 
     }
 
