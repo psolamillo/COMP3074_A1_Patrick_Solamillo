@@ -29,6 +29,7 @@ public class MainActivity extends AppCompatActivity {
 
         });
         testToast();
+
     }
 
     public double calculatePay(int numHours,double rate)
@@ -49,9 +50,16 @@ public class MainActivity extends AppCompatActivity {
         return totalPay;
     };
 
+    public double calculateTax(double pay)
+    {
+        return pay * 0.18;
+    }
+
     public void testToast()
     {
         String msg = String.valueOf(calculatePay(5,10));
+        String taxToast = String.valueOf(calculateTax(calculatePay(5,10)));
         Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, taxToast, Toast.LENGTH_SHORT).show();
     }
 }
