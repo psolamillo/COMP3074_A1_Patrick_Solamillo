@@ -1,6 +1,7 @@
 package com.example.a1_patrick_solamillo;
 
 import android.os.Bundle;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -14,7 +15,8 @@ public class MainActivity extends AppCompatActivity {
 
     public float hoursWorked;
     public double hourlyRate;
-    private EditText editText;
+    EditText userPayInput;
+    Button enterButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,7 +30,19 @@ public class MainActivity extends AppCompatActivity {
 
 
         });
-        testToast();
+        userPayInput = findViewById(R.id.edit1);
+        enterButton = findViewById(R.id.enterbutton);
+
+        enterButton.setOnClickListener(v->{
+
+                int userHours = Integer.parseInt(userPayInput.getText().toString());
+                Toast.makeText(this,String.valueOf(userHours),Toast.LENGTH_SHORT).show();
+
+        });
+
+        //Toast.makeText(this,String.valueOf(userHours),Toast.LENGTH_SHORT).show();
+        //calculatePay(userHours,10);
+        //testToast();
 
     }
 
