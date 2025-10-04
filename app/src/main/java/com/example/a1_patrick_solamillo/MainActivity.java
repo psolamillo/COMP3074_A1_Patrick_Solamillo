@@ -37,12 +37,20 @@ public class MainActivity extends AppCompatActivity {
 
         enterButton.setOnClickListener(v->{
 
+            try{
                 Double userPay = Double.parseDouble(userPayInput.getText().toString());
                 int userHours = Integer.parseInt(userHoursInput.getText().toString());
                 double totalPay = calculatePay(userHours,userPay);
                 String msg = "Users TotalPay is: " + totalPay;
 
-                Toast.makeText(this,msg,Toast.LENGTH_SHORT).show();
+                //Toast.makeText(this,msg,Toast.LENGTH_SHORT).show();
+            } catch (NumberFormatException e) {
+                   Toast.makeText(this,"Only enter numbers for pay and hours" + e.getMessage(),Toast.LENGTH_LONG).show();
+
+            } catch (Exception e) {
+                Toast.makeText(this,"An error occured: " + e.getMessage(),Toast.LENGTH_LONG).show();
+            }
+            Toast.makeText(this,"Success!",Toast.LENGTH_SHORT).show();
 
         });
 
