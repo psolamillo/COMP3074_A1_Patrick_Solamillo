@@ -3,6 +3,7 @@ package com.example.a1_patrick_solamillo;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
@@ -11,13 +12,21 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import org.w3c.dom.Text;
+
 public class MainActivity extends AppCompatActivity {
 
     public float hoursWorked;
     public double hourlyRate;
+
+
     EditText userPayInput;
     EditText userHoursInput;
     Button enterButton;
+
+
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,15 +49,32 @@ public class MainActivity extends AppCompatActivity {
             try{
                 Double userPay = Double.parseDouble(userPayInput.getText().toString());
                 int userHours = Integer.parseInt(userHoursInput.getText().toString());
-                double totalPay = calculatePay(userHours,userPay);
-                String msg = "Users TotalPay is: " + totalPay;
+
+                UserPayInfo paymentInfo = calculatePay(userPay,userHours);
+                double regularPay =  paymentInfo.regularPay;
+                double overtimePay = paymentInfo.overtimePay;
+                double total = paymentInfo.totalPay;
+
+                TextView displayPayInfo = (TextView)findViewById(R.id.displayPayInfo);
+
+                String info = "Regular Pay: " + regularPay + "\n"
+                        + "Overtime Pay: " + overtimePay + "\n"
+                        + "Total Pay: " + total;
+                displayPayInfo.setText(info);
+
+
+
+
+
+
+
 
                 //Toast.makeText(this,msg,Toast.LENGTH_SHORT).show();
             } catch (NumberFormatException e) {
                    Toast.makeText(this,"Only enter numbers for pay and hours" + e.getMessage(),Toast.LENGTH_LONG).show();
 
             } catch (Exception e) {
-                Toast.makeText(this,"An error occured: " + e.getMessage(),Toast.LENGTH_LONG).show();
+                Toast.makeText(this,"An error occurred: " + e.getMessage(),Toast.LENGTH_LONG).show();
             }
             Toast.makeText(this,"Success!",Toast.LENGTH_SHORT).show();
 
@@ -56,9 +82,22 @@ public class MainActivity extends AppCompatActivity {
 
 
 
+
+
     }
 
-    public double calculatePay(int numHours,double rate)
+    public class UserPayInfo{
+        public double regularPay;
+        public double overtimePay;
+        public double totalPay;
+
+        public UserPayInfo(double regPay, double otPay, double total){
+            regularPay = regPay;
+            overtimePay = otPay;
+            totalPay = total;
+        }
+    }
+    public UserPayInfo calculatePay(double numHours,double rate)
     {
         double regularPay=0;
         double overtimePay=0;
@@ -69,11 +108,12 @@ public class MainActivity extends AppCompatActivity {
         }
         else
         {
-            overtimePay=(numHours-40)*rate*1.5 + 40*rate;
+            regularPay = 40*rate;
+            overtimePay=(numHours-40)*rate*1.5;
         }
 
         totalPay=regularPay+overtimePay;
-        return totalPay;
+        return new UserPayInfo(regularPay,overtimePay,totalPay);
     };
 
     public double calculateTax(double pay)
@@ -81,11 +121,6 @@ public class MainActivity extends AppCompatActivity {
         return pay * 0.18;
     }
 
-    public void testToast()
-    {
-        String msg = String.valueOf(calculatePay(5,10));
-        String taxToast = String.valueOf(calculateTax(calculatePay(5,10)));
-        Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
-        Toast.makeText(this, taxToast, Toast.LENGTH_SHORT).show();
-    }
+
+
 }
