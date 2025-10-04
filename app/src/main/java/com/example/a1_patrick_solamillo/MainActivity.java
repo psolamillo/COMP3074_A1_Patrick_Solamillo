@@ -1,6 +1,8 @@
 package com.example.a1_patrick_solamillo;
 
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -33,6 +35,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_main);
+        setSupportActionBar(findViewById(R.id.toolbar1));
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
@@ -40,9 +43,11 @@ public class MainActivity extends AppCompatActivity {
 
 
         });
+
         userPayInput = findViewById(R.id.edit1);
         userHoursInput = findViewById(R.id.hourInput);
         enterButton = findViewById(R.id.enterbutton);
+
 
         enterButton.setOnClickListener(v->{
 
@@ -71,7 +76,7 @@ public class MainActivity extends AppCompatActivity {
 
                 //Toast.makeText(this,msg,Toast.LENGTH_SHORT).show();
             } catch (NumberFormatException e) {
-                   Toast.makeText(this,"Only enter numbers for pay and hours" + e.getMessage(),Toast.LENGTH_LONG).show();
+                   Toast.makeText(this,"Invalid Input. Enter numbers for pay and hours" + e.getMessage(),Toast.LENGTH_LONG).show();
 
             } catch (Exception e) {
                 Toast.makeText(this,"An error occurred: " + e.getMessage(),Toast.LENGTH_LONG).show();
