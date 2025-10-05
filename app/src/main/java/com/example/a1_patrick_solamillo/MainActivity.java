@@ -71,7 +71,7 @@ public class MainActivity extends AppCompatActivity {
                 Double userPay = Double.parseDouble(userPayString);
                 Double userHours = Double.parseDouble(userHoursString);
 
-                UserPayInfo paymentInfo = calculatePay(userPay,userHours);
+                UserPayInfo paymentInfo = calculatePay(userHours,userPay);
                 double regularPay =  paymentInfo.regularPay;
                 double overtimePay = paymentInfo.overtimePay;
                 double total = paymentInfo.totalPay;

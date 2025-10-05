@@ -13,6 +13,7 @@
         android:theme="@style/Theme.A1_Patrick_Solamillo">
         <activity
             android:name=".MainActivity"
+            android:label="Assignment 1 - Calculate Pay"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
