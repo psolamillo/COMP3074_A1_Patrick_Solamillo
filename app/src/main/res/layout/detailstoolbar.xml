@@ -9,23 +9,23 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:text="Assignment 1 - Calculate Pay"
-            android:textColor="@color/white"
-            android:padding="5dp"
-            android:layout_gravity="center"
-            android:layout_weight="1"/>
-
         <ImageView
             android:id="@+id/menubutton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/baseline_menu_24"
+            android:src="@drawable/baseline_arrow_back_24"
             android:layout_gravity="right"
             android:padding="5dp"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="Details"
+            android:textColor="@color/white"
+            android:layout_gravity="center"
+            android:layout_weight="1"/>
+
+
 
 
 
