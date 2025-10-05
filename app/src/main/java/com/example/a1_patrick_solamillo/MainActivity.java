@@ -60,9 +60,16 @@ public class MainActivity extends AppCompatActivity {
 
         enterButton.setOnClickListener(v->{
 
+            String userPayString = userPayInput.getText().toString();
+            String userHoursString = userHoursInput.getText().toString();
+
+            if (userPayString.isEmpty() || userHoursString.isEmpty()){
+                Toast.makeText(this,"Pay rate or hours worked field is empty",Toast.LENGTH_LONG).show();
+                return;
+            }
             try{
-                Double userPay = Double.parseDouble(userPayInput.getText().toString());
-                Double userHours = Double.parseDouble(userHoursInput.getText().toString());
+                Double userPay = Double.parseDouble(userPayString);
+                Double userHours = Double.parseDouble(userHoursString);
 
                 UserPayInfo paymentInfo = calculatePay(userPay,userHours);
                 double regularPay =  paymentInfo.regularPay;
@@ -109,8 +116,13 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected (MenuItem item){
+
         int id = item.getItemId();
 
+        if (detailIntent == null){
+            Toast.makeText(this, "No details to retrieve",Toast.LENGTH_LONG).show();
+            return false;
+        }
         if (id == R.id.detailsMenuOpt){
             startActivity(detailIntent);
             Toast.makeText(this,"Selected",Toast.LENGTH_SHORT).show();
