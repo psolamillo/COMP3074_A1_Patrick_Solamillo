@@ -22,8 +22,6 @@ import org.w3c.dom.Text;
 
 public class MainActivity extends AppCompatActivity {
 
-    public float hoursWorked;
-    public double hourlyRate;
     public Intent detailIntent;
 
 
@@ -75,7 +73,7 @@ public class MainActivity extends AppCompatActivity {
                 double regularPay =  paymentInfo.regularPay;
                 double overtimePay = paymentInfo.overtimePay;
                 double total = paymentInfo.totalPay;
-                double tax = paymentInfo.totalPay*0.18;
+                double tax = calculateTax(paymentInfo.totalPay);
 
 
                 TextView displayPayInfo = (TextView)findViewById(R.id.displayPayInfo);
@@ -98,7 +96,7 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-                //Toast.makeText(this,msg,Toast.LENGTH_SHORT).show();
+
             } catch (NumberFormatException e) {
                    Toast.makeText(this,"Invalid Input. Enter numbers for pay and hours" + e.getMessage(),Toast.LENGTH_LONG).show();
 
@@ -128,7 +126,6 @@ public class MainActivity extends AppCompatActivity {
         }
         if (id == R.id.detailsMenuOpt){
             startActivity(detailIntent);
-            Toast.makeText(this,"Selected",Toast.LENGTH_SHORT).show();
             return true;
 
         }
