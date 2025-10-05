@@ -23,6 +23,8 @@ public class DetailActivity extends AppCompatActivity {
     public double userPayInput;
     public double userHourInput;
 
+    public double regularPay,overtimePay,totalPay;
+
     ListView details;
 
 
@@ -45,6 +47,9 @@ public class DetailActivity extends AppCompatActivity {
 
         userPayInput = getIntent().getDoubleExtra("userpayinput",0.0);
         userHourInput = getIntent().getDoubleExtra("userhourinput",0.0);
+        regularPay = getIntent().getDoubleExtra("regular_pay",0.0);
+        overtimePay = getIntent().getDoubleExtra("overtime_pay",0.0);
+        totalPay = getIntent().getDoubleExtra("total_pay",0.0);
 
         details = findViewById(R.id.detailinfo);
 
@@ -52,6 +57,8 @@ public class DetailActivity extends AppCompatActivity {
         details.setAdapter(adapter);
 
         adapter.add(String.format(Locale.getDefault(), "Pay: %.2f  Hours: %.2f", userPayInput, userHourInput));
+        adapter.add(String.format(Locale.getDefault(), "Regular Pay: %.2f Overtime Pay: %.2f",regularPay,overtimePay ));
+        adapter.add(String.format(Locale.getDefault(), "Total Pay: %.2f" ,totalPay));
 
 
 
