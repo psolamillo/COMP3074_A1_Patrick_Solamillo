@@ -1,12 +1,15 @@
 package com.example.a1_patrick_solamillo;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.Toolbar;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -32,6 +35,7 @@ public class MainActivity extends AppCompatActivity {
 
 
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,7 +53,6 @@ public class MainActivity extends AppCompatActivity {
         userPayInput = findViewById(R.id.edit1);
         userHoursInput = findViewById(R.id.hourInput);
         enterButton = findViewById(R.id.enterbutton);
-
 
         enterButton.setOnClickListener(v->{
 
@@ -71,7 +74,10 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-
+                Intent detailIntent = new Intent(MainActivity.this, DetailActivity.class);
+                detailIntent.putExtra("regular_pay",regularPay);
+                detailIntent.putExtra("overtime_pay",overtimePay);
+                detailIntent.putExtra("total_pay",total);
 
 
 
@@ -91,8 +97,22 @@ public class MainActivity extends AppCompatActivity {
 
 
 
+
+
     }
 
+    @Override
+    public boolean onOptionsItemSelected (MenuItem item){
+        startActivity(new Intent(MainActivity.this,DetailActivity.class));
+        Toast.makeText(this,"Selected",Toast.LENGTH_SHORT).show();
+        return true;
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu){
+        getMenuInflater().inflate(R.menu.menu,menu);
+        return true;
+    }
     public class UserPayInfo{
         public double regularPay;
         public double overtimePay;
