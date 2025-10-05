@@ -75,12 +75,15 @@ public class MainActivity extends AppCompatActivity {
                 double regularPay =  paymentInfo.regularPay;
                 double overtimePay = paymentInfo.overtimePay;
                 double total = paymentInfo.totalPay;
+                double tax = paymentInfo.totalPay*0.18;
+
 
                 TextView displayPayInfo = (TextView)findViewById(R.id.displayPayInfo);
 
                 String info = "Regular Pay: " + regularPay + "\n"
                         + "Overtime Pay: " + overtimePay + "\n"
-                        + "Total Pay: " + total;
+                        + "Total Pay: " + total + "\n"
+                        + "Tax: " + tax;
                 displayPayInfo.setText(info);
 
 
