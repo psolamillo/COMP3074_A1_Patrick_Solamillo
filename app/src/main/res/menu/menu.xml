@@ -3,6 +3,6 @@
 
     <item
         android:title="User Input Details"
-        android:id="@+id/uiDetails"
+        android:id="@+id/detailsMenuOpt"
         android:icon="@drawable/baseline_menu_24" />
 </menu>

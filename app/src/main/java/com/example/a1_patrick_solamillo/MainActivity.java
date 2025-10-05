@@ -9,13 +9,14 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.widget.Toolbar;
+
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+import androidx.appcompat.widget.Toolbar;
 
 import org.w3c.dom.Text;
 
@@ -41,7 +42,9 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_main);
-        setSupportActionBar(findViewById(R.id.toolbar1));
+
+        Toolbar toolbar = findViewById(R.id.toolbar1);
+        setSupportActionBar(toolbar);
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
@@ -103,9 +106,16 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected (MenuItem item){
-        startActivity(new Intent(MainActivity.this,DetailActivity.class));
-        Toast.makeText(this,"Selected",Toast.LENGTH_SHORT).show();
-        return true;
+        int id = item.getItemId();
+
+        if (id == R.id.detailsMenuOpt){
+            startActivity(new Intent(MainActivity.this,DetailActivity.class));
+            Toast.makeText(this,"Selected",Toast.LENGTH_SHORT).show();
+            return true;
+
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 
     @Override
