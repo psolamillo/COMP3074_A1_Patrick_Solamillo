@@ -24,6 +24,7 @@ public class MainActivity extends AppCompatActivity {
 
     public float hoursWorked;
     public double hourlyRate;
+    public Intent detailIntent;
 
 
     EditText userPayInput;
@@ -61,7 +62,7 @@ public class MainActivity extends AppCompatActivity {
 
             try{
                 Double userPay = Double.parseDouble(userPayInput.getText().toString());
-                int userHours = Integer.parseInt(userHoursInput.getText().toString());
+                Double userHours = Double.parseDouble(userHoursInput.getText().toString());
 
                 UserPayInfo paymentInfo = calculatePay(userPay,userHours);
                 double regularPay =  paymentInfo.regularPay;
@@ -77,7 +78,9 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-                Intent detailIntent = new Intent(MainActivity.this, DetailActivity.class);
+                detailIntent = new Intent(MainActivity.this, DetailActivity.class);
+                detailIntent.putExtra("userpayinput",userPay);
+                detailIntent.putExtra("userhourinput",userHours);
                 detailIntent.putExtra("regular_pay",regularPay);
                 detailIntent.putExtra("overtime_pay",overtimePay);
                 detailIntent.putExtra("total_pay",total);
@@ -109,7 +112,7 @@ public class MainActivity extends AppCompatActivity {
         int id = item.getItemId();
 
         if (id == R.id.detailsMenuOpt){
-            startActivity(new Intent(MainActivity.this,DetailActivity.class));
+            startActivity(detailIntent);
             Toast.makeText(this,"Selected",Toast.LENGTH_SHORT).show();
             return true;
 

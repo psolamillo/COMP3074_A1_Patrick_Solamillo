@@ -2,7 +2,9 @@ package com.example.a1_patrick_solamillo;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.widget.ArrayAdapter;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
@@ -11,10 +13,18 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import java.util.ArrayList;
+import java.util.Locale;
+
 
 public class DetailActivity extends AppCompatActivity {
 
     ImageView backButton;
+    public double userPayInput;
+    public double userHourInput;
+
+    ListView details;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,6 +40,24 @@ public class DetailActivity extends AppCompatActivity {
 
 
         });
+
+
+
+        userPayInput = getIntent().getDoubleExtra("userpayinput",0.0);
+        userHourInput = getIntent().getDoubleExtra("userhourinput",0.0);
+
+        details = findViewById(R.id.detailinfo);
+
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this,android.R.layout.simple_list_item_1,new ArrayList<>());
+        details.setAdapter(adapter);
+
+        adapter.add(String.format(Locale.getDefault(), "Pay: %.2f  Hours: %.2f", userPayInput, userHourInput));
+
+
+
+
+
+
 
         backButton=findViewById(R.id.backbutton);
         backButton.setOnClickListener(v -> {
